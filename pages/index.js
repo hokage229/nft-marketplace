@@ -1,5 +1,5 @@
-import {ethers} from 'hardhat'
-import {useEffect, useState} from 'react/cjs/react.production.min'
+import {ethers} from 'ethers'
+import {useEffect, useState} from 'react'
 import axios from 'axios'
 import Web3Modal from 'web3modal'
 
@@ -7,8 +7,8 @@ import {nftAddress, nftMarketAddress} from '../config'
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json"
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json"
 
-export default function Home() {
-    const [nfts, setNfts] = useState([])
+const Home = () => {
+    const [nfts, setNfts] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded')
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export default function Home() {
         const provider = new ethers.providers.Web3Provider(connection)
 
         const signer = provider.getSigner()
-        const contract = new ethers.Contract(nftAddress, NFT.abi, signer)
+        const contract = new ethers.Contract(nftAddress, Market.abi, signer)
 
         const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
 
@@ -84,7 +84,7 @@ export default function Home() {
                                     <p className="text-2xl mb-4 font-bold text-white">{nft.price} ETH</p>
                                     <button
                                         className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded"
-                                        onClick={ ()=>buyNFT(nft)}
+                                        onClick={() => buyNFT(nft)}
                                     >
                                         Buy
                                     </button>
@@ -97,3 +97,5 @@ export default function Home() {
         </div>
     )
 }
+
+export default Home
