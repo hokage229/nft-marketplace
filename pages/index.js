@@ -45,7 +45,7 @@ const Home = () => {
         const provider = new ethers.providers.Web3Provider(connection)
 
         const signer = provider.getSigner()
-        const contract = new ethers.Contract(nftAddress, Market.abi, signer)
+        const contract = new ethers.Contract(nftMarketAddress, Market.abi, signer)
 
         const price = ethers.utils.parseUnits(nft.price.toString(), 'ether')
 
